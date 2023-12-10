@@ -10,6 +10,8 @@ public class InvoiceAction extends ActionSupport  {
     @Override
     public String execute() throws Exception {
         System.out.println("execute!!");
+        invoiceBean.getTaxes();
+        invoiceBean.getPriceWithTaxes();
         return SUCCESS;
     }
 
@@ -24,6 +26,15 @@ public class InvoiceAction extends ActionSupport  {
     public void validate() {
         if (invoiceBean.getSubject().isEmpty()) {
             addFieldError("invoiceBean.subject", "El concepto es obligatorio.");
+        }
+        if (invoiceBean.getDateFrom() == null) {
+            addFieldError("invoiceBean.dateFrom", "La fecha inicio es obligatoria.");
+        }
+        if (invoiceBean.getDateTo() == null) {
+            addFieldError("invoiceBean.dateTo", "La fecha fin es obligatoria.");
+        }
+        if (invoiceBean.getPrice() == null) {
+            addFieldError("invoiceBean.price", "El precio es obligatorio.");
         }
     }
 }
